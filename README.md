@@ -1,5 +1,6 @@
 You Are Awesome! App from Ch. 1 of Prof. Ghallaugher's SwiftUI Course.
-Contact me at: jcaraballo79@gmail.com
+
+Contact me at jcaraballo79@gmail.com
 
 LinkedIn profile: www.linkedin.com/in/jorge-j-caraballo
 
