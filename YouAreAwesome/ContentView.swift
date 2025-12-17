@@ -34,13 +34,18 @@ struct ContentView: View {
                 let imageString1 = "sun.max.fill"
                 let imageString2 = "hand.thumbsup"
                 
-                if message == message1 {
-                    message = message2
-                    imageString = imageString1
-                } else {
-                    message = message1
-                    imageString = imageString2
-                }
+//                if message == message1 {
+//                    message = message2
+//                    imageString = imageString1
+//                } else {
+//                    message = message1
+//                    imageString = imageString2
+//                }
+                
+// Ternary Operator
+                message = (message == message1 ? message2 : message1)
+                imageString = (message == message1 ? imageString2 : imageString1)
+                
             }
         }
         .padding()
@@ -52,3 +57,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
