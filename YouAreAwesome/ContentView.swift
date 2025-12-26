@@ -53,7 +53,9 @@ struct ContentView: View {
                             audioPlayer.stop()
                         }
                     }
+                
                 Spacer()
+                
                 Button("Show Message") {
                     
                     let messages = ["You are Awesome!",
@@ -84,6 +86,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .tint(.accentColor)
         }
         .padding()
         .buttonStyle(.borderedProminent)
@@ -115,7 +118,12 @@ struct ContentView: View {
     }
 }
 
-#Preview {
+#Preview("Light Mode") {
     ContentView()
+        .preferredColorScheme(.light)
 }
 
+#Preview("Dark Mode") {
+    ContentView()
+        .preferredColorScheme(.dark)
+}
