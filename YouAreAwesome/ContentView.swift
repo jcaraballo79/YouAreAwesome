@@ -125,5 +125,5 @@ struct ContentView: View {
 
 #Preview("Dark Mode") {
     ContentView()
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.dark )
 }
