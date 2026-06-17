@@ -16,27 +16,30 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            Spacer()
+            Text(message)
+                .font(.largeTitle)
+                .fontWeight(.black)
+                .foregroundStyle(.red)
+                .multilineTextAlignment(.center)
+                .frame(height: 120)
+                .minimumScaleFactor(0.5)
+                .animation(.easeInOut(duration: 0.15), value: message)
             
             Image(imageName)
                 .resizable()
                 .scaledToFit()
                 .clipShape(.rect(cornerRadius: 30))
                 .shadow(radius: 30)
-            
-            Text(message)
-                .font(.largeTitle)
-                .fontWeight(.black)
-                .foregroundStyle(.red)
-                .multilineTextAlignment(.center)
+                .animation(.easeInOut(duration: 0.5), value: imageName)
             
             Spacer()
             
             Button("Show Message") {
-                let messages = ["You can do it!",
-                                "You are awesome!",
-                                "You are great!",
-                                "Si se puede!",
+                let messages = ["A pájaro viejo no le sacan las plumas!",
+                                "Hoy en día ya no se respeta; ni el pájaro a la escopeta!",
+                                "A pájaro vivo no le falta agujero",
+                                "Cada pájaro lance su canto!",
+                                "Dando y dando, pajaritos volando.",
                                 "Pajaro de alto vuelo!",
                                 "El pajaro de tu abuelo!"]
                 
