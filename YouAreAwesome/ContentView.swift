@@ -43,18 +43,9 @@ struct ContentView: View {
                                 "Pajaro de alto vuelo!",
                                 "El pajaro de tu abuelo!"]
                 
-                message = messages[messageNumber]
-                messageNumber += 1
-                if messageNumber == messages.count {
-                    messageNumber = 0
-                }
+                message = messages[Int.random(in: 0...messages.count-1)]
                 
-                imageName = "image\(imageNumber)"
-                imageNumber += 1
-                
-                if imageNumber > 9 {
-                    imageNumber = 0
-                }
+                imageName = "image\(Int.random(in: 0...9))"
             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
