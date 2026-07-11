@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var lastMessageNumber = -1
     @State private var lastSoundNumber = -1
     @State private var audioPlayer: AVAudioPlayer!
+    @State private var soundIsOn = true
     let numberOfImages = 10 // Images labeled image0 - image9
     let numberOfSounds = 5
     
@@ -41,26 +42,41 @@ struct ContentView: View {
             
             Spacer()
             
-            Button("Show Message") {
-                let messages = ["A pájaro viejo no le sacan las plumas!",
-                                "Hoy en día ya no se respeta; ni el pájaro a la escopeta!",
-                                "A pájaro vivo no le falta agujero",
-                                "Cada pájaro lance su canto!",
-                                "Dando y dando, pajaritos volando.",
-                                "Pajaro de alto vuelo!",
-                                "El pajaro de tu abuelo!"]
+            HStack {
+                Text("Sound On:")
+                Toggle("Sound On:", isOn: $soundIsOn)
+                    .labelsHidden()
+                    .onChange(of: soundIsOn) {
+                        if audioPlayer != nil && audioPlayer.isPlaying {
+                            audioPlayer.stop()
+                        }
+                    }
                 
-                lastMessageNumber = nonRepeatingRandom(lastNumber: lastMessageNumber, upperBound: messages.count-1)
-                message = messages[lastMessageNumber]
+                Spacer()
                 
-                lastImageNumber = nonRepeatingRandom(lastNumber: lastImageNumber, upperBound: numberOfImages-1)
-                imageName = "image\(lastImageNumber)"
-                
-                lastSoundNumber = nonRepeatingRandom(lastNumber: lastSoundNumber, upperBound: numberOfSounds-1)
-                playSound(soundName: "sound\(lastSoundNumber)")
+                Button("Show Message") {
+                    let messages = ["A pájaro viejo no le sacan las plumas!",
+                                    "Hoy en día ya no se respeta; ni el pájaro a la escopeta!",
+                                    "A pájaro vivo no le falta agujero",
+                                    "Cada pájaro lance su canto!",
+                                    "Dando y dando, pajaritos volando.",
+                                    "Pajaro de alto vuelo!",
+                                    "El pajaro de tu abuelo!"]
+                    
+                    lastMessageNumber = nonRepeatingRandom(lastNumber: lastMessageNumber, upperBound: messages.count-1)
+                    message = messages[lastMessageNumber]
+                    
+                    lastImageNumber = nonRepeatingRandom(lastNumber: lastImageNumber, upperBound: numberOfImages-1)
+                    imageName = "image\(lastImageNumber)"
+                    
+                    lastSoundNumber = nonRepeatingRandom(lastNumber: lastSoundNumber, upperBound: numberOfSounds-1)
+                    if soundIsOn {
+                        playSound(soundName: "sound\(lastSoundNumber)")
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .font(.title2)
             }
-            .buttonStyle(.borderedProminent)
-            .font(.title2)
         }
         .padding()
     }
@@ -74,6 +90,9 @@ struct ContentView: View {
     }
     
     func playSound(soundName: String) {
+        if audioPlayer != nil && audioPlayer.isPlaying {
+            audioPlayer.stop()
+        }
         guard let soundFile = NSDataAsset(name: soundName) else {
             print("😡 Could not read file named \(soundName)")
             return
